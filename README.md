@@ -1,0 +1,2 @@
+# bill-splitster
+university assignment
