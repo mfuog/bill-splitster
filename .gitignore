@@ -11,3 +11,7 @@ db/*.sqlite3
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore local rvm settings
+.ruby-version
+.ruby-gemset
