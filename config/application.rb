@@ -22,5 +22,9 @@ module BillSplitster
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Used to encrypt cookie data which Rails uses for sessions to provide persistence
+    # between page requests.
+    config.secret_key_base = ENV["SECRET_KEY_BASE"]
   end
 end
