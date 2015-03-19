@@ -11,7 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319084332) do
+ActiveRecord::Schema.define(version: 20150319204401) do
+
+  create_table "bill_sheets", force: :cascade do |t|
+    t.integer  "status"
+    t.integer  "creator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "bill_sheets", ["creator_id"], name: "index_bill_sheets_on_creator_id"
+
+  create_table "bills", force: :cascade do |t|
+    t.float    "amount"
+    t.string   "title"
+    t.text     "note"
+    t.integer  "participant_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "bills", ["participant_id"], name: "index_bills_on_participant_id"
+
+  create_table "participants", force: :cascade do |t|
+    t.string   "name_string"
+    t.float    "balance"
+    t.integer  "bill_sheet_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "participants", ["bill_sheet_id"], name: "index_participants_on_bill_sheet_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
