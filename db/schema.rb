@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319204401) do
+ActiveRecord::Schema.define(version: 20150320150909) do
 
   create_table "bill_sheets", force: :cascade do |t|
     t.integer  "status"
     t.integer  "creator_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "title"
+    t.text     "description"
   end
 
   add_index "bill_sheets", ["creator_id"], name: "index_bill_sheets_on_creator_id"
@@ -34,7 +36,7 @@ ActiveRecord::Schema.define(version: 20150319204401) do
   add_index "bills", ["participant_id"], name: "index_bills_on_participant_id"
 
   create_table "participants", force: :cascade do |t|
-    t.string   "name_string"
+    t.string   "name"
     t.float    "balance"
     t.integer  "bill_sheet_id"
     t.datetime "created_at",    null: false
