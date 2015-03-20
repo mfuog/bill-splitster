@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-md-12">
+        <h2><%= @bill_sheet.title %></h2>
+        <p id="notice"><%= notice %></p>
+        <%= link_to "Back", bill_sheets_path, class: "button-xs" %>
+        <%= link_to "Edit", edit_bill_sheet_path(@bill_sheet), class: "button-xs" if @isCreator %>
+        <br>
+        <br>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p><%= @bill_sheet.description %></p>
+        <p><%= @bill_sheet.status %></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+    <% @bill_sheet.participants.each do |person| %>
+      <li>
+        <strong><%= person.name %></strong>: 
+      </li>
+    <% end %>
+    </div>
+</div>

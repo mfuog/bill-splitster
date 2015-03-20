@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Bill sheets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bill_sheets.each do |bill_sheet| %>
+      <tr>
+        <td><%= bill_sheet.title %></td>
+        <td><%= link_to 'Show', bill_sheet %></td>
+        <td><%= link_to 'Edit', edit_bill_sheet_path(bill_sheet) %></td>
+        <td><%= link_to 'Destroy', bill_sheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bill sheet', new_bill_sheet_path %>
