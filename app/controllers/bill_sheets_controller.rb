@@ -59,16 +59,18 @@ class BillSheetsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def bill_sheet_params
-      params.require(:bill_sheet).permit(:creator_id,
-                                         :title,
+      bills_attributes = [ :id,
+                           :amount,
+                           :title,
+                           :note,
+                           :_destroy ]
+      participants_attributes = [ :id,
+                                  :name,
+                                  :_destroy,
+                                  bills_attributes: bills_attributes ]
+      params.require(:bill_sheet).permit(:title,
                                          :description,
                                          :status,
-                                         participants_attributes: [ :name,
-                                                                    :_destroy,
-                                                                    bills_attributes: [ :amount,
-                                                                                        :title,
-                                                                                        :note,
-                                                                                        :_destroy ]
-                                                                  ] )
+                                         participants_attributes: participants_attributes)
     end
 end
