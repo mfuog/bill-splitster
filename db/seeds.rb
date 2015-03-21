@@ -93,6 +93,13 @@ Bill.create!(
 )
 
 Bill.create!(
+  participant: aris,
+  amount: 12.5,
+  title: "grocery",
+  note: "ICA"
+)
+
+Bill.create!(
   participant: lin,
   amount: 40.0,
   title: "tickets museum",

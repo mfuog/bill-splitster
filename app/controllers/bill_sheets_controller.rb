@@ -9,6 +9,7 @@ class BillSheetsController < ApplicationController
   # GET /bill_sheets/1
   def show
     @isCreator = current_user == @bill_sheet.creator
+    @new_participant = @bill_sheet.participants.build
   end
 
   # GET /bill_sheets/new

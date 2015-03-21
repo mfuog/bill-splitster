@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :participants
   resources :bill_sheets
 
   root to: 'visitors#index'
