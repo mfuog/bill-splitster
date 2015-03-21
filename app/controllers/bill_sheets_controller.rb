@@ -15,10 +15,6 @@ class BillSheetsController < ApplicationController
   # GET /bill_sheets/new
   def new
     @bill_sheet = BillSheet.new
-    3.times do
-      participant = @bill_sheet.participants.build
-      2.times { participant.bills.build }
-    end
   end
 
   # GET /bill_sheets/1/edit
