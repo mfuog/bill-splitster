@@ -1,5 +1,6 @@
 class BillSheetsController < ApplicationController
   before_action :set_bill_sheet, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: :show
 
   # GET /bill_sheets
   def index
