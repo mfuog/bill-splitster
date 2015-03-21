@@ -6,6 +6,6 @@ class CreateBillSheets < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_foreign_key :bill_sheets, :users
+    #add_foreign_key :bill_sheets, :users
   end
 end
