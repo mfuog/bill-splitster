@@ -13,8 +13,7 @@ class ParticipantsController < ApplicationController
   # POST /participants
   def create
     @participant = Participant.new(participant_params)
-
-    if @participant.save
+    if @participant.save!
       redirect_to @participant, notice: 'Participant was successfully created.'
     else
       render :new

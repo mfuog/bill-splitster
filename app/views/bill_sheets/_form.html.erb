@@ -9,6 +9,10 @@
     <%= f.label :status %>
     <%= f.select :status, options_for_select(BillSheet.statuses.keys), {}, class: "form-control" %>
   </div>
+  
+  <%= f.fields_for :participants do |builder| %>
+    <%= render "participant_fields", :f => builder %>
+  <% end %>
 
   <div class="form-actions">
     <%= f.button :submit %>

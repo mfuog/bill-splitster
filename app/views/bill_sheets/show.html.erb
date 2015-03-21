@@ -9,11 +9,6 @@
 </div>
 <div class="row">
     <div class="col-xs-12">
-        <%= render "participants/form" %>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-12">
         <p><%= @bill_sheet.description %></p>
         <p><%= @bill_sheet.status %></p>
     </div>
@@ -23,7 +18,6 @@
     <% @bill_sheet.participants.each do |person| %>
       <li>
         <strong><%= person.name %></strong>: <%= person.total_contribution %>
-
             <% person.bills.each do |bill| %>
               <li>
                 <strong><%= bill.title %></strong>: <%= bill.amount %>

@@ -1,8 +1,9 @@
 class Participant < ActiveRecord::Base
-  belongs_to :bill_sheet
+  belongs_to :bill_sheet, inverse_of: :participants
   has_many :bills, dependent: :destroy
-  validates :name, presence: true
-  validates :bill_sheet_id, presence: true
+
+  validates_presence_of :name
+  validates_presence_of :bill_sheet
 
   # Determine the participant's current contribution to the bill sheet
   # by summing up all bills.
@@ -11,7 +12,7 @@ class Participant < ActiveRecord::Base
   def total_contribution
     sum = 0.0
     bills.each do |bill|
-      sum += bill.amount
+      sum += bill.amount unless bill.new_record?
     end
     sum
   end

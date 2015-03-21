@@ -1,0 +1,12 @@
+<%= simple_form_for(@new_bill) do |f| %>
+  <div class="form-inputs">
+    <%= f.input :amount %>
+    <%= f.input :title %>
+    <%= f.input :note %>
+    <%= f.hidden_field :participant_id, value: participant.id %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -10,12 +10,14 @@ class BillSheetsController < ApplicationController
   # GET /bill_sheets/1
   def show
     @isCreator = current_user == @bill_sheet.creator
-    @new_participant = @bill_sheet.participants.build
   end
 
   # GET /bill_sheets/new
   def new
     @bill_sheet = BillSheet.new
+    3.times do
+      participant = @bill_sheet.participants.build
+    end
   end
 
   # GET /bill_sheets/1/edit
@@ -25,8 +27,8 @@ class BillSheetsController < ApplicationController
   # POST /bill_sheets
   def create
     @bill_sheet = BillSheet.new(bill_sheet_params)
-
-    if @bill_sheet.save
+    @bill_sheet.creator = current_user
+    if @bill_sheet.save!
       redirect_to @bill_sheet, notice: 'Bill sheet was successfully created.'
     else
       render :new
@@ -56,6 +58,6 @@ class BillSheetsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def bill_sheet_params
-      params.require(:bill_sheet).permit(:title, :description, :status)
+      params.require(:bill_sheet).permit(:creator_id, :title, :description, :status, participants_attributes: [ :name, :_destroy, :bill_sheet_id ] )
     end
 end
