@@ -1,7 +1,9 @@
 class Participant < ActiveRecord::Base
   belongs_to :bill_sheet, inverse_of: :participants
-  has_many :bills, dependent: :destroy
-
+  has_many :bills, dependent: :destroy, inverse_of: :participant
+  accepts_nested_attributes_for :bills,
+                                reject_if: :reject_bills,
+                                allow_destroy: true
   validates_presence_of :name
   validates_presence_of :bill_sheet
 
@@ -15,5 +17,9 @@ class Participant < ActiveRecord::Base
       sum += bill.amount unless bill.new_record?
     end
     sum
+  end
+
+  def reject_bills(attributed)
+    attributed['amount'].blank?
   end
 end

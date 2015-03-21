@@ -8,6 +8,9 @@ class ParticipantsController < ApplicationController
   # GET /participants/new
   def new
     @participant = Participant.new
+    3.times do
+      bill = @participant.build
+    end
   end
 
   # POST /participants

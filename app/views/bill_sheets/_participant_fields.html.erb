@@ -1,7 +1,10 @@
 <%= f.error_notification %>
 <div class="form-inputs">
-  <%= @bill_sheet.inspect %>
   <%= f.input :name %>
   <%= f.check_box :_destroy %>
   <%= f.label :_destroy, "Remove Participant" %>
 </div>
+
+<%= f.fields_for :bills do |builder| %>
+  <%= render "bill_fields", :f => builder %>
+<% end %>

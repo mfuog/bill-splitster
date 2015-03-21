@@ -17,6 +17,7 @@ class BillSheetsController < ApplicationController
     @bill_sheet = BillSheet.new
     3.times do
       participant = @bill_sheet.participants.build
+      2.times { participant.bills.build }
     end
   end
 
@@ -37,7 +38,7 @@ class BillSheetsController < ApplicationController
 
   # PATCH/PUT /bill_sheets/1
   def update
-    if @bill_sheet.update(bill_sheet_params)
+    if @bill_sheet.update!(bill_sheet_params)
       redirect_to @bill_sheet, notice: 'Bill sheet was successfully updated.'
     else
       render :edit
@@ -58,6 +59,16 @@ class BillSheetsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def bill_sheet_params
-      params.require(:bill_sheet).permit(:creator_id, :title, :description, :status, participants_attributes: [ :name, :_destroy, :bill_sheet_id ] )
+      params.require(:bill_sheet).permit(:creator_id,
+                                         :title,
+                                         :description,
+                                         :status,
+                                         participants_attributes: [ :name,
+                                                                    :_destroy,
+                                                                    bills_attributes: [ :amount,
+                                                                                        :title,
+                                                                                        :note,
+                                                                                        :_destroy ]
+                                                                  ] )
     end
 end

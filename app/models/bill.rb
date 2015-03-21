@@ -1,6 +1,6 @@
 class Bill < ActiveRecord::Base
-  belongs_to :participant
+  belongs_to :participant, inverse_of: :bills
 
-  validates :amount, presence: true
-  validates :participant, presence: true
+  validates_presence_of :participant
+  validates_presence_of :amount
 end
