@@ -1,9 +1,10 @@
-<%= f.error_notification %>
-<div class="form-inputs">
-  <%= f.hidden_field :id %>
-  <%= f.input :amount %>
-  <%= f.input :title %>
-  <%= f.input :note %>
-  <%= f.check_box :_destroy %>
-  <%= f.label :_destroy, "Remove bill" %>
+<div class="fields">
+  <%= f.error_notification %>
+  <div class="form-inputs">
+    <%= link_to_remove_fields "remove bill", f %>
+    <%= f.hidden_field :id %>
+    <%= f.input :amount %>
+    <%= f.input :title %>
+    <%= f.input :note %>
+  </div>
 </div>

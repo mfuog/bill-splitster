@@ -1,11 +1,12 @@
-<%= f.error_notification %>
-<div class="form-inputs">
-  <%= f.hidden_field :id %>
-  <%= f.input :name %>
-  <%= f.check_box :_destroy %>
-  <%= f.label :_destroy, "Remove Participant" %>
-</div>
+<div class="fields">
+  <%= f.error_notification %>
+  <div class="form-inputs">
+    <%= link_to_remove_fields "remove participant", f %>
+    <%= f.hidden_field :id %>
+    <%= f.input :name %>
+  </div>
 
-<%= f.fields_for :bills do |builder| %>
-  <%= render "bill_fields", :f => builder %>
-<% end %>
+  <%= f.fields_for :bills do |builder| %>
+    <%= render "bill_fields", :f => builder %>
+  <% end %>
+</div>
