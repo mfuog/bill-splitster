@@ -9,20 +9,27 @@
 </div>
 <div class="row">
     <div class="col-xs-12">
-        <p><%= @bill_sheet.description %></p>
-        <p><%= @bill_sheet.status %></p>
+        <p><strong>Status:</strong> <%= @bill_sheet.status %></p>
+        <p><strong>description:</strong> <%= @bill_sheet.description %></p>
+        <p><strong>Total Expenses:</strong> <%= @bill_sheet.total_expenses %></p>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12">
-    <% @bill_sheet.participants.each do |person| %>
+    <% @bill_sheet.participants.each do |p| %>
       <li>
-        <strong><%= person.name %></strong>: <%= person.total_contribution %>
-            <% person.bills.each do |bill| %>
+        <strong><%= p.name %></strong><br>        
+        <% unless p.bills.empty? %>
+            <strong>Paid:</strong> <%= p.contribution %><br>
+            <ol>
+            <% p.bills.each do |bill| %>
               <li>
                 <strong><%= bill.title %></strong>: <%= bill.amount %>
               </li>
             <% end %>
+            </ol>
+        <% end %>
+        <strong><%= p.name %>'s Debt:</strong> <%= p.debt %><br>
       </li>
     <% end %>
     </div>

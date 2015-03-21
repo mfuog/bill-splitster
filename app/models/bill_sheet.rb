@@ -9,6 +9,18 @@ class BillSheet < ActiveRecord::Base
   validates_presence_of :creator
   validates_presence_of :status
 
+  # Determine the total amount of money spent by all participants of
+  # the bill sheet.
+  #
+  # Return the the total amount of expenses as a float.
+  def total_expenses
+    sum = 0.0
+    participants.each do |p|
+      sum += p.contribution
+    end
+    sum
+  end
+
   def reject_participants(attributed)
     attributed['name'].blank?
   end

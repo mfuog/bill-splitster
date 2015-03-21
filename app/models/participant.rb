@@ -7,11 +7,11 @@ class Participant < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :bill_sheet
 
-  # Determine the participant's current contribution to the bill sheet
-  # by summing up all bills.
+  # Determine the participant's total contribution to the
+  # bill sheet by summing up all bills.
   #
-  # Returns the participant's total contribution as a float.
-  def total_contribution
+  # Returns the participant's contribution as a float.
+  def contribution
     sum = 0.0
     bills.each do |bill|
       sum += bill.amount unless bill.new_record?
@@ -19,7 +19,18 @@ class Participant < ActiveRecord::Base
     sum
   end
 
-  def reject_bills(attributed)
-    attributed['amount'].blank?
+  # Determine the participant's total debt to the bill sheet
+  # by calculating equal shares of the total expenses and dividing
+  # it among participants.
+  # 
+  # Returns the participant's debt as a float. 
+  def debt
+    target_contribution = bill_sheet.total_expenses/bill_sheet.participants.size
+    target_contribution - contribution    
   end
+
+  private
+    def reject_bills(attributed)
+      attributed['amount'].blank?
+    end
 end
