@@ -13,6 +13,7 @@ gem 'figaro', '>= 1.0.0.rc1'
 gem 'high_voltage'
 gem 'sendgrid'
 gem 'simple_form'
+gem 'disqus_rails'
 
 group :development do
   gem 'sqlite3'
