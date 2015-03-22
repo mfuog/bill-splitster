@@ -14,11 +14,7 @@ class Participant < ActiveRecord::Base
   #
   # Returns the participant's contribution as a float.
   def contribution
-    sum = 0.0
-    bills.each do |bill|
-      sum += bill.amount unless bill.new_record?
-    end
-    sum
+    bills.to_a.sum(&:amount)
   end
 
   # Determine the participant's total debt to the bill sheet
