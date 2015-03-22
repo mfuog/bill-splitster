@@ -1,49 +1,14 @@
-# bill-splitster
-university assignment
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+BillSplitster
+=============
+ 
+This is a university assignment for the course **4ME105 - Web and Mobile Development** at School of Computer Science, Physics and Mathematics, Linnaeus University, Sweden.
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
+#####_Assignment 4: This prototype of the *BillSplitster* app helps groups of people keep track of and eventually split shared expenses while on vacation or on a trip,
+available at [BillSplitster](https://billsplitster.herokuapp.com)
 
-Rails Composer is open source and supported by subscribers. Please join RailsApps to support development of Rails Composer.
+_Summer Term 2015_
 
-Problems? Issues?
------------
+================
 
-Need help? Ask on Stack Overflow with the tag 'railsapps.'
-
-Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
-
-If the application doesn't work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include the diagnostics.
-
-Ruby on Rails
--------------
-
-This application requires:
-
-- Ruby 2.2.0
-- Rails 4.2.0
-
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
-
-Getting Started
----------------
-
-Documentation and Support
--------------------------
-
-Issues
--------------
-
-Similar Projects
-----------------
-
-Contributing
-------------
-
-Credits
--------
-
-License
--------
+_The skeleton of this application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
+provided by the [RailsApps Project](http://railsapps.github.io/)._
