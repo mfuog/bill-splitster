@@ -1,7 +1,7 @@
 class Participant < ActiveRecord::Base
   belongs_to :bill_sheet, inverse_of: :participants
-  has_many :owed_transactions, dependent: :destroy, class_name: "Transaction", foreign_key: "sender_id"
-  has_many :receivable_transactions, dependent: :destroy, class_name: "Transaction", foreign_key: "target_id"
+  has_many :transactions_outgoing, dependent: :destroy, class_name: "Transaction", foreign_key: "sender_id"
+  has_many :transactions_incoming, dependent: :destroy, class_name: "Transaction", foreign_key: "target_id"
   has_many :bills, dependent: :destroy, inverse_of: :participant
   accepts_nested_attributes_for :bills,
                                 reject_if: :reject_bills,

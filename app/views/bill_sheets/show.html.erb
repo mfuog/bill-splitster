@@ -20,7 +20,8 @@
       <li>
         <strong><%= p.name %></strong><br>        
         <% unless p.bills.empty? %>
-            <strong>Paid:</strong> <%= p.contribution %><br>
+            <strong>Contributed:</strong> <%= p.contribution %><br>
+            
             <ol>
             <% p.bills.each do |bill| %>
               <li>
@@ -28,6 +29,24 @@
               </li>
             <% end %>
             </ol>
+
+            <ol>
+            <strong>Receives:</strong>
+            <% p.transactions_incoming.each do |t| %>
+            <li>
+                <%= t.amount %>€ from <%= t.sender.name %>
+            </li>
+            <% end %>
+            </ol>
+            <ol>
+            <strong>Owes</strong>
+            <% p.transactions_outgoing.each do |t| %>
+            <li>
+                <%= t.amount %>€ to <%= t.target.name %>
+            </li>
+            <% end %>
+            </ol>
+
         <% end %>
         <strong><%= p.name %>'s Debt:</strong> <%= p.debt %><br>
       </li>
