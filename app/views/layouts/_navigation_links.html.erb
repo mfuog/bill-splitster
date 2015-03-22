@@ -1,12 +1,42 @@
 <%# add navigation links to this file %>
-<li><%= link_to 'About', page_path('about') %></li>
+<li>
+  <%= link_to new_bill_sheet_path do %>
+  <span class="glyphicon glyphicon-edit"></span>
+    New Bill Sheet
+  <% end %>
+</li>
+
 <% if user_signed_in? %>
-  <li><%= link_to 'Edit account', edit_user_registration_path %></li>
-  <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
+  <li>
+    <%= link_to edit_user_registration_path do %>
+    <span class="glyphicon glyphicon-user"></span>
+      Edit Account
+    <% end %>
+  </li>
+  <li>
+    <%= link_to(destroy_user_session_path, method: :delete)  do %>
+    <span class="glyphicon glyphicon-log-out"></span>
+    Logout
+    <% end %>
+  </li>
+
 <% else %>
-  <li><%= link_to 'Sign in', new_user_session_path %></li>
-  <li><%= link_to 'Sign up', new_user_registration_path %></li>
+  <li>
+    <%= link_to new_user_session_path do %>
+      <span class="glyphicon glyphicon-log-in"></span>
+      Login/Sign up
+    <% end %>
+  </li>
 <% end %>
-<% if user_signed_in? %>
+
+<li>
+  <%= link_to page_path('about') do %>
+  <span class="glyphicon glyphicon-question-sign"></span>
+    About BillSplitster
+  <% end %>
+</li>
+
+<!--# TEMP -->
   <li><%= link_to 'Users', users_path %></li>
-<% end %>
+  <li><%= link_to 'Sheets', bill_sheets_path %></li>
+  <li><%= link_to 'Transactions', transactions_path %></li>
