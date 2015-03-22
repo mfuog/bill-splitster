@@ -1,26 +1,37 @@
 <%= simple_form_for(@bill_sheet) do |f| %>
   <div class="form-inputs">
-    <%= f.input :title, placeholder: "daytrip to Öland", label: false %>
-    <% unless f.object.new_record? %>
+
+    <% if @isCreator || f.object.new_record? %>
+      <%= f.input :title, placeholder: "daytrip to Öland", label: false %>
+
+      <% unless f.object.new_record? %>
       <div class="form-group">
         <%= f.label :status %>
         <%= f.select :status,
                      options_for_select(BillSheet.statuses.keys),
                      {},
                      class: "form-control" %>
+      <% end %>
+
       </div>
+    <% else %>
+      <p class="lead">
+        <span class="label label-success"><%= @bill_sheet.status %></span>
+        <%= @bill_sheet.description %>
+      </p>
     <% end %>
   </div>
   
-  <div>
   <%= f.fields_for :participants do |builder| %>
     <%= render "participant_fields", :f => builder %>
   <% end %>
-  </div>
-  
-  <p><%= link_to_add_fields "Add participant", f, :participants %></p>
+
+  <p class="participant-fields">
+    <%= link_to_add_fields "+ Add participant", f, :participants %>
+  </p>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= link_to 'Cancel', @bill_sheet_path, class: "btn btn-default" %> <%= f.button :submit, class: "btn btn-primary" %>
+
   </div>
 <% end %>

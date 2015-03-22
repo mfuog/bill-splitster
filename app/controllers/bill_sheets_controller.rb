@@ -19,6 +19,7 @@ class BillSheetsController < ApplicationController
 
   # GET /bill_sheets/1/edit
   def edit
+    @isCreator = current_user == @bill_sheet.creator
   end
 
   # POST /bill_sheets
