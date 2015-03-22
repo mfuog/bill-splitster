@@ -27,7 +27,7 @@ class BillSheetsController < ApplicationController
     @bill_sheet = BillSheet.new(bill_sheet_params)
     @bill_sheet.creator = current_user
     if @bill_sheet.save!
-      @bill_sheet.create_transactions
+      @bill_sheet.update_transactions
       redirect_to @bill_sheet, notice: 'Bill sheet was successfully created.'
     else
       render :new
@@ -38,7 +38,7 @@ class BillSheetsController < ApplicationController
   def update
     current_expenses = @bill_sheet.total_expenses
     if @bill_sheet.update!(bill_sheet_params)
-      @bill_sheet.create_transactions if @bill_sheet.total_expenses != current_expenses
+      @bill_sheet.update_transactions if @bill_sheet.total_expenses != current_expenses
       redirect_to @bill_sheet, notice: 'Bill sheet was successfully updated.'
     else
       render :edit

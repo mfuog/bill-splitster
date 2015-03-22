@@ -26,21 +26,27 @@ class BillSheet < ActiveRecord::Base
     participants.flat_map { |p| p.bills }
   end
 
-  def create_transactions
-    Transaction.destroy_all
-    participants.each do |p|
-      share = p.contribution/participants.size
-      participants.each do |p2|
-        unless p2 == p
-          Transaction.create(amount: share, sender: p2, target: p)
-        end
-      end
-    end
+  def update_transactions
+    # destroy won't delete models without an id key
+    participants.flat_map { |p| p.transactions_incoming.delete_all }
+    participants.flat_map { |p| p.transactions_outgoing.delete_all }
+    create_transactions
   end
 
   private
     def default_values
       self.status ||= "open"
+    end
+
+    def create_transactions
+      participants.each do |p|
+        share = p.contribution/participants.size
+        participants.each do |p2|
+          unless p2 == p || share == 0.0
+            Transaction.create(amount: share, sender: p2, target: p)
+          end
+        end
+      end    
     end
 
     def reject_participants(attributed)
