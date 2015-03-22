@@ -1,56 +1,66 @@
 <div class="row">
     <div class="col-xs-12">
         <h2><%= @bill_sheet.title %></h2>
-        <%= link_to "Back", bill_sheets_path, class: "button-xs" %>
-        <%= link_to "Edit", edit_bill_sheet_path(@bill_sheet), class: "button-xs" if @isCreator %>
-        <br>
-        <br>
     </div>
 </div>
 <div class="row">
     <div class="col-xs-12">
-        <p><strong>Status:</strong> <%= @bill_sheet.status %></p>
-        <p><strong>description:</strong> <%= @bill_sheet.description %></p>
-        <p><strong>Total Expenses:</strong> <%= @bill_sheet.total_expenses %></p>
+        <p class="lead">
+            <% if @bill_sheet.status == "open" %>
+                <span class="label label-success">open</span>
+            <% else %>
+                <span class="label label-default">closed</span>
+            <% end %>
+            <%= @bill_sheet.description %>
+        </p>
+
+        <% if @isCreator && @bill_sheet.status == "open" %>
+            <%= link_to "Edit", edit_bill_sheet_path(@bill_sheet), class: "btn btn-primary btn-xs" %>
+        <% end %> 
+
+        <h3>Total Expenses<span class="pull-right"><%= @bill_sheet.total_expenses %> €</span></h3>
     </div>
 </div>
-<div class="row">
-    <div class="col-xs-12">
-    <% @bill_sheet.participants.each do |p| %>
-      <li>
-        <strong><%= p.name %></strong><br>        
-        <% unless p.bills.empty? %>
-            <strong>Contributed:</strong> <%= p.contribution %><br>
-            
-            <ol>
+
+<% @bill_sheet.participants.each do |p| %>
+    <div class="list-group">
+        <a href="#" class="list-group-item active">
+            <strong><%= p.name %></strong>
+            <i><span class="pull-right">contributed <%= p.bills.empty? ? 0.0 : p.contribution %> €</span></i>
+        <a> 
+        <% unless p.bills.empty? %>        
             <% p.bills.each do |bill| %>
-              <li>
-                <strong><%= bill.title %></strong>: <%= bill.amount %>
-              </li>
+              <a href="#" class="list-group-item">
+                <strong><%= bill.title %></strong>
+                <span class="pull-right"><%= bill.amount %> €</span>
+              </a>
             <% end %>
-            </ol>
 
-            <ol>
-            <strong>Receives:</strong>
-            <% p.transactions_incoming.each do |t| %>
-            <li>
-                <%= t.amount %>€ from <%= t.sender.name %>
-            </li>
-            <% end %>
-            </ol>
-            <ol>
-            <strong>Owes</strong>
-            <% p.transactions_outgoing.each do |t| %>
-            <li>
-                <%= t.amount %>€ to <%= t.target.name %>
-            </li>
-            <% end %>
-            </ol>
+            <div class="list-group transactions">
+                <strong>Receives:</strong>
+                <% p.transactions_incoming.each do |t| %>
+                    <% unless t.amount == 0.0 %>
+                    <a href="#" class="list-group-item list-group-item-success">
+                        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                        <%= "#{'%.2f' % t.amount} € from #{t.sender.name}" %>
+                    </a>
+                    <% end %>
+                <% end %>
+            </div>
 
+            <div class="list-group transactions">            
+                <strong>Owes:</strong>
+                <% p.transactions_outgoing.each do |t| %>
+                    <% unless t.amount == 0.0 %>
+                    <a href="#" class="list-group-item list-group-item-danger">
+                        <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                        <%= "#{'%.2f' % t.amount} € to #{t.target.name}" %>
+                    </a>
+                    <% end %>
+                <% end %>
+            </div>
         <% end %>
-        <strong><%= p.name %>'s Debt:</strong> <%= p.debt %><br>
-      </li>
-    <% end %>
     </div>
-</div>
+<% end %>
+
 <%- disqus_thread %>
