@@ -133,3 +133,7 @@ Bill.create!(
   title: "museum of modern art",
   note: ""
 )
+
+BillSheet.all.each do |s|
+  s.update_transactions
+end
