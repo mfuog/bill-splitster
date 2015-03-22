@@ -1,7 +1,21 @@
-<% content_for :title do %>About<% end %>
-<h3>About the Website</h3>
-<p>
-This web application was created with
-<%= link_to('Rails Composer', 'http://railsapps.github.io/rails-composer/') %>
-from the <%= link_to('RailsApps project', 'http://railsapps.github.io/') %>.
-</p>
+<div class="row">
+  <div class="col-md-2">
+      <%= image_tag("split-bill.png", alt: "Split the bills", class: "scissors" ) %>
+  </div>
+
+  <div class="col-md-5">
+    <h2>About BillSplitster</h2>
+    
+    <div class="lead">
+      <strong>BillSplitster</strong> is a mobile web app that helps groups of people keep track shared expenses.
+    </div>
+
+    <p><strong>This web app is prototype for a university assignment</strong> for the course <i>4ME105 - Web and Mobile Development</i> at School of Computer Science, Physics and Mathematics, Linnaeus University, Sweden.</p>
+
+    <p>The web app was created with
+      <%= link_to('Rails Composer', 'http://railsapps.github.io/rails-composer/') %>
+      from the <%= link_to('RailsApps project', 'http://railsapps.github.io/') %>.</p>
+
+    <br>
+  </div>
+</div>
