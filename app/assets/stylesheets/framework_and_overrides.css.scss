@@ -18,6 +18,17 @@ img:not(.scissors) {
   font-size: 16px;
 }
 
+.row div {
+//  border: 1px solid lightgrey;
+}
+
+.participant-fields {
+  padding-left: 20px;
+}
+.bill-fields {
+  padding-left: 30px;
+}
+
 // apply styles to HTML elements
 // to make views framework-neutral
 main {

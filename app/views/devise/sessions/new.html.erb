@@ -6,11 +6,12 @@
     <%= f.input :password, required: false %>
     <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
   </div>
+
   <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
+    <%= f.button :submit, "Log in", class: "btn btn-large btn-primary" %>
+    <%= link_to "Forgot your password?", new_password_path(resource_name) %><br><br>
   </div>
 <% end %>
-<%= link_to "Forgot your password?", new_password_path(resource_name) %><br><br>
 
-<h3>No Account yet?</h3>
-<%= link_to "Sign up!", new_user_registration_path, class: "btn btn-large btn-default" %>
+<h2>No Account yet?</h2>
+<%= link_to "Sign up!", new_user_registration_path, class: "btn btn-large btn-primary" %>
