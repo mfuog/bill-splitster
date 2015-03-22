@@ -12,7 +12,7 @@ class BillSheet < ActiveRecord::Base
   # Determine the total amount of money spent by all participants of
   # the bill sheet.
   #
-  # Return the the total amount of expenses as a float.
+  # Returns the the total amount of expenses as a float.
   def total_expenses
     sum = 0.0
     participants.each do |p|
@@ -21,7 +21,28 @@ class BillSheet < ActiveRecord::Base
     sum
   end
 
-  def reject_participants(attributed)
-    attributed['name'].blank?
+  # Determine the bills of all participants of the bill sheet.
+  # 
+  # Returns all bills within the bill sheet.
+  def bills
+    participants.flat_map { |p| p.bills }
   end
+
+
+  def create_transactions
+    Transaction.destroy_all
+    participants.each do |p|
+      share = p.contribution/participants.size
+      participants.each do |p2|
+        unless p2 == p
+          Transaction.create(amount: share, sender: p2, target: p)
+        end
+      end
+    end
+  end
+
+  private
+    def reject_participants(attributed)
+      attributed['name'].blank?
+    end
 end

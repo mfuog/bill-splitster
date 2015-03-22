@@ -26,6 +26,7 @@ class BillSheetsController < ApplicationController
     @bill_sheet = BillSheet.new(bill_sheet_params)
     @bill_sheet.creator = current_user
     if @bill_sheet.save!
+      @bill_sheet.create_transactions
       redirect_to @bill_sheet, notice: 'Bill sheet was successfully created.'
     else
       render :new
@@ -34,7 +35,9 @@ class BillSheetsController < ApplicationController
 
   # PATCH/PUT /bill_sheets/1
   def update
+    bills = @bill_sheet.bills.size
     if @bill_sheet.update!(bill_sheet_params)
+      @bill_sheet.create_transactions if @bill_sheet.bills.size != bills
       redirect_to @bill_sheet, notice: 'Bill sheet was successfully updated.'
     else
       render :edit
