@@ -5,10 +5,12 @@
     <%= f.input :title %>
     <%= f.input :description %>
   </div>
+  <% unless f.object.new_record? %>
   <div class="form-group">
     <%= f.label :status %>
     <%= f.select :status, options_for_select(BillSheet.statuses.keys), {}, class: "form-control" %>
   </div>
+  <% end %>
   
   <%= f.fields_for :participants do |builder| %>
     <%= render "participant_fields", :f => builder %>

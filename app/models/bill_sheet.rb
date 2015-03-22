@@ -5,7 +5,9 @@ class BillSheet < ActiveRecord::Base
                                 reject_if: :reject_participants,
                                 allow_destroy: true
   enum status: [:open, :closed]
+  before_validation :default_values
 
+  validates_presence_of :title
   validates_presence_of :creator
   validates_presence_of :status
 
@@ -24,7 +26,6 @@ class BillSheet < ActiveRecord::Base
     participants.flat_map { |p| p.bills }
   end
 
-
   def create_transactions
     Transaction.destroy_all
     participants.each do |p|
@@ -38,6 +39,10 @@ class BillSheet < ActiveRecord::Base
   end
 
   private
+    def default_values
+      self.status ||= "open"
+    end
+
     def reject_participants(attributed)
       attributed['name'].blank?
     end
