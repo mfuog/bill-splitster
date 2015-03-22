@@ -14,11 +14,7 @@ class BillSheet < ActiveRecord::Base
   #
   # Returns the the total amount of expenses as a float.
   def total_expenses
-    sum = 0.0
-    participants.each do |p|
-      sum += p.contribution
-    end
-    sum
+    bills.sum(&:amount)
   end
 
   # Determine the bills of all participants of the bill sheet.
