@@ -3,7 +3,9 @@ BillSplitster
  
 This is a university assignment for the course **4ME105 - Web and Mobile Development** at School of Computer Science, Physics and Mathematics, Linnaeus University, Sweden.
 
-#####_Assignment 4:_ This prototype of the *BillSplitster* app helps groups of people keep track of and eventually split shared expenses while on vacation or on a trip,
+#####_Assignment 4:_
+
+This prototype of the *BillSplitster* app helps groups of people keep track of and eventually split shared expenses while on vacation or on a trip,
 available at [BillSplitster](https://billsplitster.herokuapp.com)
 
 _Summer Term 2015_
