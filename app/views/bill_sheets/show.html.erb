@@ -47,19 +47,20 @@
                     <% end %>
                 <% end %>
             </div>
-
-            <div class="list-group transactions">            
-                <strong>Owes:</strong>
-                <% p.transactions_outgoing.each do |t| %>
-                    <% unless t.amount == 0.0 %>
-                    <a href="#" class="list-group-item list-group-item-danger">
-                        <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-                        <%= "#{'%.2f' % t.amount} € to #{t.target.name}" %>
-                    </a>
-                    <% end %>
-                <% end %>
-            </div>
         <% end %>
+        
+        <div class="list-group transactions">            
+            <strong>Owes:</strong>
+            <% p.transactions_outgoing.each do |t| %>
+                <% unless t.amount == 0.0 %>
+                <a href="#" class="list-group-item list-group-item-danger">
+                    <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+                    <%= "#{'%.2f' % t.amount} € to #{t.target.name}" %>
+                </a>
+                <% end %>
+            <% end %>
+        </div>
+        
     </div>
 <% end %>
 
