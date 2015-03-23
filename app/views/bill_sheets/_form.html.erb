@@ -3,10 +3,10 @@
 
     <% if @isCreator || f.object.new_record? %>
       <%= f.input :title, placeholder: "daytrip to Öland", label: false %>
+      <%= f.input :description, placeholder: "Lorem ipsum dolor...", label: false %>
 
       <% unless f.object.new_record? %>
       <div class="form-group">
-        <%= f.label :status %>
         <%= f.select :status,
                      options_for_select(BillSheet.statuses.keys),
                      {},
