@@ -9,8 +9,8 @@
       <%= f.input :amount, class: "form-control", placeholder: "13.5", label: false %>
       <span class="input-group-addon">€</span>
     </div>
-  
+
     <%= f.input :title, class: "form-control", placeholder: "grocery", label: false %>
   </div>
-  <br>
+  <%= f.input :file, as: :file, wrapper: :vertical_file_input, label: false %>
 </div>
