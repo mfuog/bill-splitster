@@ -8,7 +8,8 @@
       <% unless f.object.new_record? %>
       <div class="form-group">
         <%= f.select :status,
-                     options_for_select(BillSheet.statuses.keys),
+                     options_for_select(BillSheet.statuses.keys,
+                                        selected: @bill_sheet.status),
                      {},
                      class: "form-control" %>
       <% end %>
