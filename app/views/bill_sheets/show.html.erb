@@ -27,7 +27,7 @@
         <% unless p.bills.empty? %>        
             <% p.bills.each do |bill| %>
               <a href="#" class="list-group-item">
-                <strong><%= bill.title %></strong>
+                <strong><%= bill.title.empty? ? "unnamed bill" : bill.title %></strong>
                 <span class="pull-right"><%= bill.amount %> €</span>
               </a>
             <% end %>
