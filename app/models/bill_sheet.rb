@@ -44,12 +44,21 @@ class BillSheet < ActiveRecord::Base
         participants.each do |p2|
           unless p2 == p || share == 0.0
             # If a transaction between both participants
-            # exists, only update the amount accordingly
-            t = Transaction.where(sender: p,
-                                  target: p2).first
-            if t && [t.amount, share].max == t.amount
-              t.update!(amount: t.amount - share)
-            else
+            # exists, only update the transactions accordingly
+            t = Transaction.where(sender: p, target: p2).first
+            if t
+              t_amount = t.amount
+              if share < t_amount
+                t.update!(amount: t_amount - share)
+              elsif share > t_amount
+                t.delete
+                Transaction.create(amount: share - t_amount,
+                                   sender: p,
+                                   target: p2)
+              else # same amount of debt
+                t.delete
+              end
+            else # no debts between participants yet
               Transaction.create(amount: share,
                                  sender: p2,
                                  target: p)
