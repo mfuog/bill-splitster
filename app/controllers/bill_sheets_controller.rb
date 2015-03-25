@@ -39,9 +39,12 @@ class BillSheetsController < ApplicationController
 
   # PATCH/PUT /bill_sheets/1
   def update
-    current_expenses = @bill_sheet.total_expenses
+    previous_expenses = @bill_sheet.total_expenses
+    previous_participants = @bill_sheet.participants.size
     if @bill_sheet.update!(bill_sheet_params)
-      @bill_sheet.update_transactions if @bill_sheet.total_expenses != current_expenses
+      expenses_changed = @bill_sheet.total_expenses != previous_expenses
+      paricipants_changed = previous_participants != @bill_sheet.participants.size
+      @bill_sheet.update_transactions if  expenses_changed || paricipants_changed
       redirect_to @bill_sheet, notice: 'Bill sheet was successfully updated.'
     else
       render :edit
